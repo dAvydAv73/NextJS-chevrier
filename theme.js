@@ -6,4 +6,13 @@ export const theme = {
   tertiary: "#F6F6F6",
   slate: "#1E293B",
   "vivid-green-cyan": "#00d084",
+  bgsky950: "#082f49",
+  myyellow: "#fbbf24",
+  amber50: "#fffbeb",
+  bgamber700: "#B45309",
+  bgyellow400: "#FBBF24",
+  bgzinc500: "#71717A",
+  bggray600: "#4B5563",
+  carlingue: "#4B5563",
+  bgamber900: "#451a03"
 };

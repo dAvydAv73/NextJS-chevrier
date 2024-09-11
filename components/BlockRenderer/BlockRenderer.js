@@ -1,32 +1,19 @@
-import { CallToActionButton } from "components/CallToActionButton";
-import { Column } from "components/Column";
-import { Columns } from "components/Columns";
-import { Cover } from "components/Cover";
-import { FormspreeForm } from "components/FormspreeForm";
-import { Gallery } from "components/Gallery";
-import { Heading } from "components/Heading";
-import { Paragraph } from "components/Paragraph";
-import { PropertyFeatures } from "components/PropertyFeatures";
-import { PropertySearch } from "components/PropertySearch";
-import { TickItem } from "components/TickItem";
+import { CallToActionButton } from "../CallToActionButton";
+import { Column } from "../Column";
+import { Columns } from "../Columns";
+import { Cover } from "../Cover";
+import { FormspreeForm } from "../FormspreeForm";
+import { Gallery } from "../Gallery";
+import { Heading } from "../Heading";
+import { Paragraph } from "../Paragraph";
+import { TickItem } from "../TickItem";
 import Image from "next/image";
-import { theme } from "theme";
+import { theme } from "../../theme";
 
 export const BlockRenderer = ({ blocks }) => {
   return blocks.map((block) => {
     switch (block.name) {
-      case "acf/propertyfeatures": {
-        return (
-          <PropertyFeatures
-            key={block.id}
-            price={block.attributes.price}
-            bathrooms={block.attributes.bathrooms}
-            bedrooms={block.attributes.bedrooms}
-            hasParking={block.attributes.has_parking}
-            petFriendly={block.attributes.pet_friendly}
-          />
-        );
-      }
+      
       case "acf/tickitem": {
         return (
           <TickItem key={block.id}>
@@ -52,13 +39,18 @@ export const BlockRenderer = ({ blocks }) => {
           />
         );
       }
-      case "acf/ctabutton": {
+      case "acf/cta-button": {
+      console.log('CallToActionButton :', block)
+
+      console.log('CallToActionButton.destination :', block.attributes.data.destination)
+
         return (
           <CallToActionButton
             key={block.id}
             buttonLabel={block.attributes.data.label}
             destination={block.attributes.data.destination || "/"}
             align={block.attributes.data.align}
+            btnclass={block.attributes.data.invert}
           />
         );
       }
@@ -66,7 +58,7 @@ export const BlockRenderer = ({ blocks }) => {
         return (
           <Paragraph
             key={block.id}
-            textAlign={block.attributes.align}
+            textAlign={block.attributes.textAlign}
             content={block.attributes.content}
             textColor={
               theme[block.attributes.textColor] ||
@@ -83,11 +75,12 @@ export const BlockRenderer = ({ blocks }) => {
             level={block.attributes.level}
             content={block.attributes.content}
             textAlign={block.attributes.textAlign}
+            textColor={
+              theme[block.attributes.textColor] ||
+              block.attributes.style?.color?.text
+            }
           />
         );
-      }
-      case "acf/propertysearch": {
-        return <PropertySearch key={block.id} />;
       }
       case "core/cover": {
         return (
@@ -97,6 +90,7 @@ export const BlockRenderer = ({ blocks }) => {
         );
       }
       case "core/columns": {
+
         return (
           <Columns
             key={block.id}
@@ -110,11 +104,17 @@ export const BlockRenderer = ({ blocks }) => {
               block.attributes.style?.color?.background
             }
           >
-            <BlockRenderer blocks={block.innerBlocks} />
+            {block.innerBlocks.map((innerBlock, index) => (
+              <BlockRenderer 
+                key={innerBlock.id} 
+                blocks={[{...innerBlock, index}]}
+              />
+            ))}
           </Columns>
         );
       }
       case "core/column": {
+
         return (
           <Column
             key={block.id}
@@ -127,6 +127,7 @@ export const BlockRenderer = ({ blocks }) => {
               theme[block.attributes?.backgroundColor || ''] ||
               block.attributes?.style?.color?.background| ''
             }
+            index={block.index} // Ajoutez cette ligne pour les animations
           >
             <BlockRenderer blocks={block.innerBlocks} />
           </Column>

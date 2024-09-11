@@ -8,10 +8,39 @@ module.exports = {
   ],
   theme: {
     extend: {
-      fontFamily: {
-        heading: "var(--font-aboreto)",
-        body: "var(--font-poppins)",
+      keyframes: () => ({
+        slideRight: {
+          "0%": { opacity: 0, marginLeft: "-600px"},
+          "100%": { opacity: 1, marginLeft: "0"}
+        },
+        slideLeft: {
+          "0%": { opacity: 0, marginRight: "-600px"},
+          "100%": { opacity: 1, marginRight: "0"}
+        }
+      }),
+      animation: {
+        slideRight: "slideRight 1s ease-in",
+        slideLeft: "slideLeft 1s ease-in",
       },
+      fontFamily: {
+        heading: "var(--font-dmserifdisplay)",
+        body: ['NeutraLight', 'sans-serif'],
+        'neutra-bold': ['NeutraBold', 'sans-serif'],
+        'neutra-demi': ['NeutraDemi', 'sans-serif'],
+        'neutra-light': ['NeutraLight', 'sans-serif'],
+      },
+      width: {
+        'logo-sm': '200px',
+        'logo-md': '230px',
+        'logo-lg': '260px',
+      },
+      letterSpacing: {
+      tightest: '-.075em',
+      tighter: '-.05em',
+      normal: '0',
+      wider: '.05em',
+      widest: '.25em',
+    }
     },
   },
   plugins: [],

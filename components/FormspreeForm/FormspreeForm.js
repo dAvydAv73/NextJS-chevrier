@@ -1,6 +1,6 @@
 "use client";
 import { useForm, ValidationError } from "@formspree/react";
-import { Input } from "components/Input";
+import { Input } from "../Input";
 
 export const FormspreeForm = ({ formId }) => {
   const [state, handleSubmit] = useForm(formId);

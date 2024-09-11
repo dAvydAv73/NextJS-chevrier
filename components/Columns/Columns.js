@@ -8,7 +8,7 @@ export const Columns = ({
   const backgroundColorStyle = backgroundColor ? { backgroundColor } : {};
   return (
     <div
-      className="my-10"
+      className="py-10"
       style={{ ...textColorStyle, ...backgroundColorStyle }}
     >
       <div

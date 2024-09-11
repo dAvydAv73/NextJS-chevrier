@@ -1,21 +1,31 @@
 import { cleanAndTransformBlocks } from "./cleanAndTransformBlocks";
 
 export const getPage = async (uri) => {
+  const locale = 'fr';
+  const language = locale.toUpperCase();
+
   const params = {
     query: `
-    query PageQuery($uri: String!) {
+    query PageQuery($uri: String!,$language: LanguageCodeEnum!) {
       nodeByUri(uri: $uri) {
         ... on Page {
           blocks(postTemplate: false)
-        }
-        ... on Property {
-          blocks(postTemplate: false)
+          translation(language: $language) {
+              id
+              title
+              slug
+              language {
+                code
+                slug
+              }
+            }
         }
       }
     }
   `,
     variables: {
       uri,
+      language
     },
   };
 

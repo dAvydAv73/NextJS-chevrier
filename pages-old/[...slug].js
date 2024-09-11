@@ -17,14 +17,11 @@ export const getStaticPaths = async () => {
             uri
           }
         }
-        properties {
-          nodes {
-            uri
-          }
-        }
+        
       }
     `,
   });
+
 
   return {
     paths: [...data.pages.nodes, ...data.properties.nodes]

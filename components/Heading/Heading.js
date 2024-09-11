@@ -1,12 +1,13 @@
 import React from "react";
-import { getFontSizeForHeading, getTextAlign } from "utils/fonts";
+import { getFontSizeForHeading, getTextAlign } from "../../utils/fonts";
 
-export const Heading = ({ textAlign, content, level }) => {
+export const Heading = ({ textAlign, content, level, textColor }) => {
   const tag = React.createElement(`h${level}`, {
     dangerouslySetInnerHTML: { __html: content },
-    className: `font-heading max-w-5xl mx-auto my-5 ${getFontSizeForHeading(
+    className: `neutra-bold uppercase tracking-wider max-w-5xl mx-auto my-6 ${getFontSizeForHeading(
       level
     )} ${getTextAlign(textAlign)}`,
+    style: textColor ? { color: textColor } : {}
   });
   return tag;
 };
