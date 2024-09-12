@@ -40,9 +40,7 @@ export const BlockRenderer = ({ blocks }) => {
         );
       }
       case "acf/cta-button": {
-      console.log('CallToActionButton :', block)
 
-      console.log('CallToActionButton.destination :', block.attributes.data.destination)
 
         return (
           <CallToActionButton
