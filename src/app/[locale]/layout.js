@@ -1,6 +1,6 @@
 
 import {NextIntlClientProvider} from 'next-intl';
-import {getMessages} from 'next-intl/server';
+import {unstable_setRequestLocale,getMessages} from 'next-intl/server';
 
 import { Red_Hat_Display, DM_Serif_Display } from "next/font/google";
 import "../../../styles/globals.css";
@@ -28,6 +28,9 @@ export default async function RootLayout({ children, params }) {
   const {locale} = params;
   const menuData = await getMenu(locale);
 
+  // Set the locale for the request
+  unstable_setRequestLocale(locale);
+
   // Providing all messages to the client
   // side is the easiest way to get started
   const messages = await getMessages(locale);
@@ -54,4 +57,8 @@ export default async function RootLayout({ children, params }) {
       </body>
     </html>
   );
+}
+// Add this export to enable static rendering
+export function generateStaticParams() {
+  return [{ locale: 'fr' }, { locale: 'en' }];
 }
