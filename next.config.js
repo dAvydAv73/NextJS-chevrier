@@ -4,7 +4,6 @@ const withNextIntl = createNextIntlPlugin('./src/i18n.js');
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  basePath: '/aviateurs-pwa',  // Assurez-vous que ceci correspond au sous-répertoire
   images: {
     remotePatterns: [
       {

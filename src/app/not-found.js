@@ -7,6 +7,7 @@ export default function NotFound() {
     <html>
         <body>
         <h1>Something went wrong!</h1>
+        <p>Error 404</p>
         </body>
     </html>
     );
