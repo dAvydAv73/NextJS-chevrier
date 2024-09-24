@@ -12,14 +12,14 @@ import { theme } from "../../theme";
 
 export const BlockRenderer = ({ blocks }) => {
   return blocks.map((block, index) => {
-    console.log('Block:', JSON.stringify(block, null, 2)); // Pour le débogage
+    //console.log('Block:', JSON.stringify(block, null, 2)); // Pour le débogage
     // Vérification de sécurité pour block.attributes
     const attributes = block.attributes || {};
     const customClasses = typeof attributes.classesTailwind === 'string' 
       ? attributes.classesTailwind 
       : '';
 
-    console.log(`Custom classes for block ${index}:`, customClasses); // Log pour le débogage
+    //console.log(`Custom classes for block ${index}:`, customClasses); // Log pour le débogage
 
     switch (block.name) {
       
