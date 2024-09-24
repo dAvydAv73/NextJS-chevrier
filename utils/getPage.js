@@ -1,9 +1,11 @@
 import { cleanAndTransformBlocks } from "./cleanAndTransformBlocks";
 
-export const getPage = async (uri) => {
+export async function getPage(uri) {
+  console.log('========== getPage Start ==========');
   console.log('getPage called with uri:', uri);
-  const locale = 'fr';
+  const locale = uri === '/home' ? 'en' : 'fr';
   const language = locale.toUpperCase();
+  console.log('Locale:', locale, 'Language:', language);
 
   const params = {
     query: `
@@ -30,8 +32,10 @@ export const getPage = async (uri) => {
     },
   };
 
+  console.log('GraphQL query params:', JSON.stringify(params, null, 2));
+
   try {
-    console.log('Sending GraphQL request with params:', JSON.stringify(params, null, 2));
+    console.log('Fetching from:', process.env.WP_GRAPHQL_URL);
     const response = await fetch(process.env.WP_GRAPHQL_URL, {
       method: "POST",
       headers: {
@@ -40,24 +44,28 @@ export const getPage = async (uri) => {
       body: JSON.stringify(params),
     });
 
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
+    console.log('Response status:', response.status);
 
-    const { data } = await response.json();
-    console.log('Received GraphQL response:', JSON.stringify(data, null, 2));
+    const responseData = await response.json();
+    console.log('Raw response data:', JSON.stringify(responseData, null, 2));
 
-    if (!data.nodeByUri) {
-      console.log('No data found for uri:', uri);
+    const { data } = responseData;
+
+    if (!data || !data.nodeByUri) {
+      console.log('No data or nodeByUri found');
       return null;
     }
 
-    console.log('Raw blocks:', data.nodeByUri.blocks);
+    console.log('nodeByUri data:', JSON.stringify(data.nodeByUri, null, 2));
+
     const blocks = cleanAndTransformBlocks(data.nodeByUri.blocks);
     console.log('Transformed blocks:', JSON.stringify(blocks, null, 2));
+
+    console.log('========== getPage End ==========');
     return blocks;
   } catch (error) {
     console.error('Error in getPage:', error);
+    console.log('========== getPage Error End ==========');
     throw error;
   }
-};
+}
