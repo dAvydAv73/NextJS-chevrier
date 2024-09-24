@@ -1,69 +1,39 @@
-const createNextIntlPlugin = require('next-intl/plugin');
-const withNextIntl = createNextIntlPlugin('./src/i18n.js');
+'use client'
+import { usePathname } from 'next/navigation';
+import React from 'react';
 
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-  reactStrictMode: true,
-  output: 'standalone',
-  images: {
-    remotePatterns: [
-      {
-        protocol: 'http',
-        hostname: process.env.WP_IMAGES_URL,
-        port: '',
-        pathname: '/**'
-      },
-      {
-        protocol: 'https',
-        hostname: process.env.WP_IMAGES_URL,
-        port: '',
-        pathname: '/**'
-      }
-    ],
-  },
-  experimental: {
-    esmExternals: 'loose',
-    optimizeCss: true,
-  },
-  onDemandEntries: {
-    maxInactiveAge: 25 * 1000,
-    pagesBufferLength: 2,
-  },
-  webpack: (config, { isServer }) => {
-    if (!isServer) {
-      config.optimization.splitChunks.cacheGroups = {
-        ...config.optimization.splitChunks.cacheGroups,
-        commons: {
-          name: 'commons',
-          chunks: 'all',
-          minChunks: 2,
-        },
-      };
-    }
+export const LanguageSwitcher = () => {
+    const pathname = usePathname();
+    
+    console.log('Current pathname:', pathname, typeof pathname);
 
-    // Augmenter la limite de taille des assets
-    config.performance = {
-      ...config.performance,
-      maxAssetSize: 1000000,
+    const getOtherLangPath = (currentPath, targetLang) => {
+        if (typeof currentPath !== 'string') {
+            console.error('Expected string for currentPath, got:', typeof currentPath);
+            return '/';
+        }
+        const pathParts = currentPath.split('/');
+        pathParts[1] = targetLang;
+        return pathParts.join('/');
     };
 
-    // Ajout du support pour le top-level await
-    config.experiments = { ...config.experiments, topLevelAwait: true };
+    const currentLang = pathname && typeof pathname === 'string' ? pathname.split('/')[1] : 'fr';
 
-    return config;
-  },
-  async rewrites() {
-    return [
-      {
-        source: '/:path*',
-        destination: '/:path*',
-      },
-      {
-        source: '/:path*',
-        destination: '/_error',
-      },
-    ];
-  },
+    return (
+        <div className="flex langSwitcher border-none items-center	">
+            <a 
+                href={getOtherLangPath(pathname, 'fr')}
+                className={`px-1 py-1 ${currentLang === 'fr' ? 'font-bold' : ''}`}
+            >
+                FR
+            </a>
+            <span>&nbsp;|&nbsp;</span>
+            <a 
+                href={getOtherLangPath(pathname, 'en')}
+                className={`px-1 py-1 ${currentLang === 'en' ? 'font-bold' : ''}`}
+            >
+                EN
+            </a>
+        </div>
+    );
 };
-
-module.exports = withNextIntl(nextConfig);
