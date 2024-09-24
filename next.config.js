@@ -11,13 +11,13 @@ const nextConfig = {
         protocol: 'http',
         hostname: process.env.WP_IMAGES_URL,
         port: '',
-        pathname: '/**' 
+        pathname: '/**'
       },
       {
         protocol: 'https',
         hostname: process.env.WP_IMAGES_URL,
         port: '',
-        pathname: '/**' 
+        pathname: '/**'
       }
     ],
   },
@@ -26,17 +26,12 @@ const nextConfig = {
     optimizeCss: true,
   },
   onDemandEntries: {
-    // période en ms où les pages seront gardées en mémoire
     maxInactiveAge: 25 * 1000,
-    // nombre de pages à garder en mémoire
     pagesBufferLength: 2,
   },
   webpack: (config, { isServer }) => {
-    // Optimisations webpack
     if (!isServer) {
       config.optimization.splitChunks.cacheGroups = {
-         // Ajoutez cette ligne pour augmenter la limite de taille des logs
-        config.performance.maxAssetSize = 1000000;
         ...config.optimization.splitChunks.cacheGroups,
         commons: {
           name: 'commons',
@@ -45,6 +40,12 @@ const nextConfig = {
         },
       };
     }
+
+    // Augmenter la limite de taille des assets
+    config.performance = {
+      ...config.performance,
+      maxAssetSize: 1000000,
+    };
 
     // Ajout du support pour le top-level await
     config.experiments = { ...config.experiments, topLevelAwait: true };
