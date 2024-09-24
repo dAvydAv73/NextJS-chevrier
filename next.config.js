@@ -25,10 +25,18 @@ const nextConfig = {
     esmExternals: 'loose',
     optimizeCss: true,
   },
+  onDemandEntries: {
+    // période en ms où les pages seront gardées en mémoire
+    maxInactiveAge: 25 * 1000,
+    // nombre de pages à garder en mémoire
+    pagesBufferLength: 2,
+  },
   webpack: (config, { isServer }) => {
     // Optimisations webpack
     if (!isServer) {
       config.optimization.splitChunks.cacheGroups = {
+         // Ajoutez cette ligne pour augmenter la limite de taille des logs
+        config.performance.maxAssetSize = 1000000;
         ...config.optimization.splitChunks.cacheGroups,
         commons: {
           name: 'commons',
