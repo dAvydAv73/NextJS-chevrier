@@ -11,9 +11,15 @@ import Image from "next/image";
 import { theme } from "../../theme";
 
 export const BlockRenderer = ({ blocks }) => {
-  return blocks.map((block) => {
+  return blocks.map((block, index) => {
+    console.log('Block:', JSON.stringify(block, null, 2)); // Pour le débogage
+    // Vérification de sécurité pour block.attributes
+    const attributes = block.attributes || {};
+    const customClasses = typeof attributes.classesTailwind === 'string' 
+      ? attributes.classesTailwind 
+      : '';
 
-    const customClasses = block.attributes?.classesTailwind || '';
+    console.log(`Custom classes for block ${index}:`, customClasses); // Log pour le débogage
 
     switch (block.name) {
       
@@ -95,22 +101,22 @@ export const BlockRenderer = ({ blocks }) => {
 
         return (
           <Columns
-            key={block.id}
-            isStackedOnMobile={block.attributes.isStackedOnMobile}
+            key={block.id || `column-${index}`}
+            isStackedOnMobile={attributes.isStackedOnMobile}
             customClasses={customClasses}
             textColor={
-              theme[block.attributes.textColor] ||
-              block.attributes.style?.color?.text
+              theme[attributes.textColor] ||
+              attributes.style?.color?.text
             }
             backgroundColor={
-              theme[block.attributes.backgroundColor] ||
-              block.attributes.style?.color?.background
+              theme[attributes.backgroundColor] ||
+              attributes.style?.color?.background
             }
           >
-            {block.innerBlocks.map((innerBlock, index) => (
-              <BlockRenderer 
-                key={innerBlock.id} 
-                blocks={[{...innerBlock, index}]}
+            {block.innerBlocks && block.innerBlocks.map((innerBlock, innerIndex) => (
+              <BlockRenderer
+                key={innerBlock.id || `inner-block-${innerIndex}`}
+                blocks={[{...innerBlock, index: innerIndex}]}
               />
             ))}
           </Columns>
@@ -153,8 +159,12 @@ export const BlockRenderer = ({ blocks }) => {
         );
       }
       default: {
-        console.log("UNKNOWN: ", block);
-        return null;
+        console.log(`UNKNOWN BLOCK TYPE at index ${index}:`, block.name);
+        return (
+          <div key={block.id || `unknown-block-${index}`}>
+            Unknown block type: {block.name}
+          </div>
+        );
       }
     }
   });
