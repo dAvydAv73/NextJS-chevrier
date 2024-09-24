@@ -1,18 +1,34 @@
+import { v4 as uuid } from "uuid";
+
 export const cleanAndTransformBlocks = (blocksJSON) => {
-  const blocks = JSON.parse(JSON.stringify(blocksJSON));
+  console.log('cleanAndTransformBlocks called with:', blocksJSON);
+  let blocks;
+  try {
+    blocks = JSON.parse(JSON.stringify(blocksJSON));
+  } catch (error) {
+    console.error('Error parsing blocksJSON:', error);
+    return [];
+  }
 
-  const cleanBlock = (block) => {
-    // Assurez-vous que classesTailwind est toujours une chaîne
-    if (block.attributes && 'classesTailwind' in block.attributes) {
-      block.attributes.classesTailwind = String(block.attributes.classesTailwind || '');
-    }
-
-    if (block.innerBlocks && Array.isArray(block.innerBlocks)) {
-      block.innerBlocks = block.innerBlocks.map(cleanBlock);
-    }
-
-    return block;
+  const assignId = (b) => {
+    b.forEach((block) => {
+      block.id = uuid();
+      if (block.attributes?.url) {
+        block.attributes.url = block.attributes.url.replace("https", "http");
+      }
+      if (block.attributes) {
+        console.log('Block attributes:', block.attributes);
+        if ('classesTailwind' in block.attributes) {
+          console.log('classesTailwind:', block.attributes.classesTailwind);
+        }
+      }
+      if (block.innerBlocks?.length) {
+        assignId(block.innerBlocks);
+      }
+    });
   };
 
-  return blocks.map(cleanBlock);
+  assignId(blocks);
+  console.log('Transformed blocks:', JSON.stringify(blocks, null, 2));
+  return blocks;
 };
