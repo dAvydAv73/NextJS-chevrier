@@ -12,6 +12,9 @@ import { theme } from "../../theme";
 
 export const BlockRenderer = ({ blocks }) => {
   return blocks.map((block) => {
+
+    const customClasses = block.attributes?.classesTailwind || '';
+
     switch (block.name) {
       
       case "acf/tickitem": {
@@ -88,11 +91,13 @@ export const BlockRenderer = ({ blocks }) => {
         );
       }
       case "core/columns": {
+       
 
         return (
           <Columns
             key={block.id}
             isStackedOnMobile={block.attributes.isStackedOnMobile}
+            customClasses={customClasses}
             textColor={
               theme[block.attributes.textColor] ||
               block.attributes.style?.color?.text
@@ -117,6 +122,7 @@ export const BlockRenderer = ({ blocks }) => {
           <Column
             key={block.id}
             width={block.attributes?.width || ''}
+            customClasses={customClasses}
             textColor={
               theme[block.attributes?.textColor || ''] ||
               block.attributes?.style?.color?.text || ''

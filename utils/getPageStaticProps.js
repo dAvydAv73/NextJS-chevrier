@@ -17,7 +17,22 @@ export const getPageStaticProps = async (context) => {
             ... on Page {
               id
               title
-              blocks(postTemplate: false)
+              blocks(postTemplate: false){
+                name
+                attributes {
+                  ... on BlockAttributesUnion {
+                    classesTailwind
+                  }
+                }
+                innerBlocks {
+                  name
+                  attributes {
+                    ... on BlockAttributesUnion {
+                      classesTailwind
+                    }
+                  }
+                }
+              }
               featuredImage {
                 node {
                   sourceUrl

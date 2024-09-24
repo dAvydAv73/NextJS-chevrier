@@ -1,13 +1,14 @@
 "use client"
 import { useInView } from "react-intersection-observer";
 
-export const Column = ({ children, width, textColor, backgroundColor, index = 0 }) => {
+export const Column = ({ children, width, textColor, backgroundColor, customClasses, index = 0 }) => {
   const { ref, inView } = useInView({
     threshold: 0.2,
     triggerOnce: true,
   });
   const textColorStyle = textColor ? { color: textColor } : {};
   const backgroundColorStyle = backgroundColor ? { backgroundColor } : {};
+  
   const widthStyle = width
     ? { minWidth: width, flexGrow: 1 }
     : { flexGrow: 1, flexBasis: 0 };
@@ -21,7 +22,7 @@ export const Column = ({ children, width, textColor, backgroundColor, index = 0 
         ...widthStyle,
         ...textColorStyle,
         ...backgroundColorStyle }}
-      className="px-2 py-5"
+      className={`px-2 py-5 ${customClasses}`}
     >
       {children}
     </div>

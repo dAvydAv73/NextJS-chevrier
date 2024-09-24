@@ -3,12 +3,14 @@ export const Columns = ({
   children,
   textColor,
   backgroundColor,
+  customClasses,
 }) => {
+
   const textColorStyle = textColor ? { color: textColor } : {};
   const backgroundColorStyle = backgroundColor ? { backgroundColor } : {};
   return (
     <div
-      className="py-10"
+      className={`py-10 ${customClasses}`}
       style={{ ...textColorStyle, ...backgroundColorStyle }}
     >
       <div

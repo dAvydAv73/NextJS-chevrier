@@ -89,6 +89,10 @@ h2, h3, h4{
   filter: drop-shadow(1px 2px 1px rgba(0, 0, 0, 0.8));
 }
 
+.service1{
+  margin-bottom: -5em;
+}
+
 /* Styles pour les écrans de taille moyenne et supérieure */
 @media (min-width: 768px) {
   .navbar .container,
@@ -132,5 +136,15 @@ h2, h3, h4{
   }
   .navbar .logoLink{
     margin-bottom: 0.65em;
+  }
+  .service2{
+    margin-bottom: -2em;
+  }
+  .horairesinside{
+    margin-top: -2.5em
+  }
+  .horairesimage{
+    margin-top: -6em;
+    padding-bottom: 3em
   }
 }
