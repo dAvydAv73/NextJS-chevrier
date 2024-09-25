@@ -2,24 +2,32 @@ import { BlockRenderer } from "components/BlockRenderer";
 import { MainMenu } from "components/MainMenu";
 import Head from "next/head";
 import { useRouter } from 'next/navigation';
-import React, { useState, useTransition } from 'react';
-import { getCookie } from 'cookies-next'; // Assurez-vous d'installer ce package si ce n'est pas déjà fait
+import React, { useState, useEffect } from 'react';
+import { getCookie } from 'cookies-next';
 
 export const Page = (props) => {
-
   const router = useRouter();
   const [menuItems, setMenuItems] = useState(props.mainMenuItems);
 
   useEffect(() => {
     const determineLanguage = () => {
+      console.log('router.asPath:', router.asPath, 'type:', typeof router.asPath);
+
       // Vérifiez d'abord l'URL
-      const pathLanguage = router.asPath.split('/')[1];
-      if (pathLanguage === 'fr' || pathLanguage === 'en') {
-        return pathLanguage;
+      if (typeof router.asPath === 'string') {
+        const pathParts = router.asPath.split('/');
+        console.log('pathParts:', pathParts);
+        const pathLanguage = pathParts[1];
+        if (pathLanguage === 'fr' || pathLanguage === 'en') {
+          return pathLanguage;
+        }
+      } else {
+        console.error('router.asPath is not a string:', router.asPath);
       }
       
       // Si l'URL ne contient pas la langue, vérifiez le cookie
       const cookieLanguage = getCookie('next_locale');
+      console.log('cookieLanguage:', cookieLanguage);
       if (cookieLanguage) {
         return cookieLanguage;
       }
@@ -29,6 +37,7 @@ export const Page = (props) => {
     };
 
     const language = determineLanguage();
+    console.log('Determined language:', language);
     
     // Sélectionnez les éléments du menu en fonction de la langue
     if (language === 'fr') {
@@ -45,7 +54,7 @@ export const Page = (props) => {
         <meta name="description" content={props.seo.metaDesc} />
       </Head>
       <MainMenu
-        items={props.mainMenuItems}
+        items={menuItems}
         callToActionEmail={props.callToActionEmail}
         callToActionLabel={props.callToActionLabel}
         callToAction2Label={props.callToAction2Label}
