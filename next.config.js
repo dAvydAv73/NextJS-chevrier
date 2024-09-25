@@ -22,8 +22,8 @@ const nextConfig = {
     ],
   },
   experimental: {
-    esmExternals: 'loose',
-    optimizeCss: true,
+    //esmExternals: 'loose',
+    //optimizeCss: true,
   },
   onDemandEntries: {
     maxInactiveAge: 25 * 1000,
