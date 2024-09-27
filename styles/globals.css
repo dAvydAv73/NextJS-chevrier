@@ -4,10 +4,10 @@
 
 @layer components {
   .btn {
-    @apply hover:bg-gray-600 bg-gray-500 text-slate-50 inline-block my-2 px-20 py-3 uppercase cursor-pointer  hover:text-white tracking-widest text-sm transition-all;
+    @apply hover:bg-gray-600 bg-gray-500 text-slate-50 whitespace-nowrap inline-block my-2 px-20 py-3 uppercase cursor-pointer  hover:text-white tracking-widest text-sm transition-all;
   }
   .btninvert{
-    @apply hover:bg-slate-100 bg-slate-50 text-gray-500 inline-block my-2 px-20 py-3 uppercase cursor-pointer  hover:text-white tracking-widest text-sm transition-all;
+    @apply hover:bg-slate-300 bg-slate-100  text-gray-500 whitespace-nowrap inline-block my-2 px-20 py-3 uppercase cursor-pointer  hover:text-gray-500 tracking-widest text-sm transition-all;
 
   }
 }
@@ -15,7 +15,7 @@
 @font-face {
   font-family: 'NeutraBold';
   src: url('/fonts/Neutra2Text-Bold.woff2') format('woff2');
-  font-weight: 400;
+  font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
@@ -91,6 +91,10 @@ h2, h3, h4{
 
 .service1{
   margin-bottom: -5em;
+}
+strong{
+  font-weight: 500!important;
+  font-family: 'NeutraDemi'!important;
 }
 
 /* Styles pour les écrans de taille moyenne et supérieure */

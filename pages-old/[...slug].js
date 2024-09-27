@@ -22,7 +22,7 @@ export const getStaticPaths = async () => {
       `,
     });
 
-    console.log('GraphQL query result:', JSON.stringify(data, null, 2));
+    //console.log('GraphQL query result:', JSON.stringify(data, null, 2));
 
     if (!data.pages || !data.pages.nodes || !data.properties || !data.properties.nodes) {
       console.error('Unexpected data structure:', data);
@@ -38,20 +38,20 @@ export const getStaticPaths = async () => {
         return page.uri !== "/";
       })
       .map((page) => {
-        console.log('Processing uri:', page.uri);
+        //console.log('Processing uri:', page.uri);
         if (typeof page.uri !== 'string') {
           console.error('Uri is not a string:', page.uri);
           return null;
         }
         const slug = page.uri.substring(1, page.uri.length - 1).split("/");
-        console.log('Generated slug:', slug);
+        //console.log('Generated slug:', slug);
         return {
           params: { slug },
         };
       })
       .filter(Boolean); // Remove any null entries
 
-    console.log('Generated paths:', paths);
+    //console.log('Generated paths:', paths);
 
     return {
       paths,

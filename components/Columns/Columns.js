@@ -8,6 +8,7 @@ export const Columns = ({
   backgroundColor,
   customClasses,
 }) => {
+
   return (
     <div
       className={`py-10 ${customClasses}`}

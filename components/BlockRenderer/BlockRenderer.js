@@ -49,7 +49,7 @@ export const BlockRenderer = ({ blocks }) => {
         );
       }
       case "acf/cta-button": {
-
+        console.log(block.attributes.data.destination || "/")
 
         return (
           <CallToActionButton
@@ -98,7 +98,6 @@ export const BlockRenderer = ({ blocks }) => {
       }
       case "core/columns": {
        
-
         return (
           <Columns
             key={block.id || `column-${index}`}
@@ -123,7 +122,7 @@ export const BlockRenderer = ({ blocks }) => {
         );
       }
       case "core/column": {
-
+        
         return (
           <Column
             key={block.id}
@@ -158,6 +157,21 @@ export const BlockRenderer = ({ blocks }) => {
           />
         );
       }
+      case "acf/contact-div": {
+        console.log("acf/contact-div block:", block);
+    
+        const blockId = block.attributes.data.id || ""; // Récupère l'ID du bloc
+    
+        return (
+          <div
+            key={block.id}
+            id={blockId} // Assigne l'ID récupéré depuis ACF
+            className={block.attributes.data.custom_class || ""} // Si vous avez des classes personnalisées
+          >
+            {/* Si vous avez un contenu spécifique à injecter, il peut être ajouté ici */}
+          </div>
+        );
+    }
       default: {
         console.log(`UNKNOWN BLOCK TYPE at index ${index}:`, block.name);
         return (

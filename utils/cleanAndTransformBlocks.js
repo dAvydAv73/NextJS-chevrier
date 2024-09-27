@@ -1,17 +1,17 @@
 import { v4 as uuid } from "uuid";
 
 export const cleanAndTransformBlocks = (blocks) => {
-  console.log('cleanAndTransformBlocks input:', JSON.stringify(blocks, null, 2));
+  //console.log('cleanAndTransformBlocks input:', JSON.stringify(blocks, null, 2));
 
   if (!Array.isArray(blocks)) {
-    console.error('Input is not an array:', blocks);
+    //console.error('Input is not an array:', blocks);
     return [];
   }
 
   const assignId = (b) => {
     return b.map((block) => {
       if (typeof block !== 'object') {
-        console.error('Invalid block:', block);
+        //console.error('Invalid block:', block);
         return null;
       }
 
@@ -25,9 +25,9 @@ export const cleanAndTransformBlocks = (blocks) => {
       }
 
       if (newBlock.attributes) {
-        console.log('Block attributes:', JSON.stringify(newBlock.attributes, null, 2));
+        //console.log('Block attributes:', JSON.stringify(newBlock.attributes, null, 2));
         if ('classesTailwind' in newBlock.attributes) {
-          console.log('classesTailwind:', newBlock.attributes.classesTailwind);
+          //console.log('classesTailwind:', newBlock.attributes.classesTailwind);
         }
       }
 
@@ -40,6 +40,6 @@ export const cleanAndTransformBlocks = (blocks) => {
   };
 
   const transformedBlocks = assignId(blocks);
-  console.log('Transformed blocks:', JSON.stringify(transformedBlocks, null, 2));
+  //console.log('Transformed blocks:', JSON.stringify(transformedBlocks, null, 2));
   return transformedBlocks;
 };

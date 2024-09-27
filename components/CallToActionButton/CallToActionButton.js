@@ -1,6 +1,6 @@
 "use client"
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
 
@@ -12,6 +12,7 @@ export const CallToActionButton = ({
 }) => {
   const params = useParams();
   const locale = params?.locale || 'en';
+  const [url, setUrl] = useState('/');
 
   const btnMap = {
     true : "btninvert",
@@ -30,28 +31,53 @@ export const CallToActionButton = ({
       return '/';
     }
 
-    try {
-      const parsedUrl = new URL(url);
-      // Extraire le chemin de l'URL (sans le domaine)
-      let path = parsedUrl.pathname;
-      
-      // Supprimer le slash initial si présent
-      if (path.startsWith('/')) {
-        path = path.slice(1);
+    if (typeof window !== 'undefined') {
+      const currentOrigin = window.location.origin;
+      if (url.startsWith(currentOrigin) && url.includes('#')) {
+        const [path, hash] = url.split('#');
+        if (path === currentOrigin || path === `${currentOrigin}/${locale}`) {
+          return `#${hash}`;
+        }
       }
 
-      // Construire l'URL locale
-      return `/${locale}/${path}`;
-    } catch (error) {
-      console.error('Invalid URL:', url);
-      return '/';
+      try {
+        const parsedUrl = new URL(url, currentOrigin);
+        let path = parsedUrl.pathname;
+
+        if (path.startsWith('/')) {
+          path = path.slice(1);
+        }
+
+        return `/${locale}/${path}${parsedUrl.hash || ''}`;
+      } catch (error) {
+        console.error('Invalid URL:', url);
+        return '/';
+      }
+    }
+
+    // Fallback for server-side rendering
+    return url;
+  };
+
+  useEffect(() => {
+    if (destination?.url) {
+      setUrl(parseUrl(destination.url));
+    }
+  }, [destination]);
+
+  const handleScrollToAnchor = (event, url) => {
+    if (url.startsWith('#')) {
+      event.preventDefault();
+      const elementId = url.substring(1);
+      const element = document.getElementById(elementId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
     }
   };
 
-  const url = destination?.url;
   const target = destination?.target || '_self';
   const title = destination?.title;
-
 
   return (
     <div className={alignMap[align]}>
@@ -59,6 +85,7 @@ export const CallToActionButton = ({
         href={url}
         target={target}
         className={`${btnMap[btnclass]} neutra-light`}
+        onClick={(e) => handleScrollToAnchor(e, url)}
       >
         {buttonLabel}
       </Link>
