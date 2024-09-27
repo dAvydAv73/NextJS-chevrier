@@ -96,7 +96,9 @@ strong{
   font-weight: 500!important;
   font-family: 'NeutraDemi'!important;
 }
-
+.horairesinside{
+  padding-top: 6em
+}
 /* Styles pour les écrans de taille moyenne et supérieure */
 @media (min-width: 768px) {
   .navbar .container,
@@ -145,7 +147,8 @@ strong{
     margin-bottom: -2em;
   }
   .horairesinside{
-    margin-top: -2.5em
+    margin-top: -2.5em;
+    padding-top: 2em
   }
   .horairesimage{
     margin-top: -6em;

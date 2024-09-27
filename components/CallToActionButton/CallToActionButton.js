@@ -33,22 +33,36 @@ export const CallToActionButton = ({
 
     if (typeof window !== 'undefined') {
       const currentOrigin = window.location.origin;
-      if (url.startsWith(currentOrigin) && url.includes('#')) {
-        const [path, hash] = url.split('#');
-        if (path === currentOrigin || path === `${currentOrigin}/${locale}`) {
-          return `#${hash}`;
-        }
+      
+      // Check if it's an external URL
+      if (url.startsWith('http') || url.startsWith('https')) {
+        return url; // Return external URLs as-is
       }
 
+      // Handle internal anchor links
+      if (url.startsWith('#')) {
+        return url;
+      }
+
+      // Handle internal links
+      if (url.startsWith('/')) {
+        return `/${locale}${url}`;
+      }
+
+      // For other cases, try to parse the URL
       try {
         const parsedUrl = new URL(url, currentOrigin);
-        let path = parsedUrl.pathname;
-
-        if (path.startsWith('/')) {
-          path = path.slice(1);
+        if (parsedUrl.origin === currentOrigin) {
+          // It's an internal URL
+          let path = parsedUrl.pathname;
+          if (path.startsWith('/')) {
+            path = path.slice(1);
+          }
+          return `/${locale}/${path}${parsedUrl.hash || ''}`;
+        } else {
+          // It's an external URL
+          return url;
         }
-
-        return `/${locale}/${path}${parsedUrl.hash || ''}`;
       } catch (error) {
         console.error('Invalid URL:', url);
         return '/';
