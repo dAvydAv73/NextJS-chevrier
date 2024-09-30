@@ -49,7 +49,7 @@ export const BlockRenderer = ({ blocks }) => {
         );
       }
       case "acf/cta-button": {
-        console.log(block.attributes.data.destination || "/")
+        //console.log(block.attributes.data.destination || "/")
 
         return (
           <CallToActionButton
@@ -158,7 +158,7 @@ export const BlockRenderer = ({ blocks }) => {
         );
       }
       case "acf/contact-div": {
-        console.log("acf/contact-div block:", block);
+        //console.log("acf/contact-div block:", block);
     
         const blockId = block.attributes.data.id || ""; // Récupère l'ID du bloc
     

@@ -22,8 +22,9 @@ const nextConfig = {
     ],
   },
   experimental: {
-    //esmExternals: 'loose',
-    //optimizeCss: true,
+    // Vous pouvez décommenter ces lignes si nécessaire
+    // esmExternals: 'loose',
+    // optimizeCss: true,
   },
   onDemandEntries: {
     maxInactiveAge: 25 * 1000,
@@ -41,29 +42,17 @@ const nextConfig = {
       };
     }
 
-    // Augmenter la limite de taille des assets
     config.performance = {
       ...config.performance,
       maxAssetSize: 1000000,
     };
 
-    // Ajout du support pour le top-level await
     config.experiments = { ...config.experiments, topLevelAwait: true };
 
     return config;
   },
-  async rewrites() {
-    return [
-      {
-        source: '/:path*',
-        destination: '/:path*',
-      },
-      {
-        source: '/:path*',
-        destination: '/_error',
-      },
-    ];
-  },
 };
 
+
+// Appliquez withNextIntl à la configuration complète
 module.exports = withNextIntl(nextConfig);

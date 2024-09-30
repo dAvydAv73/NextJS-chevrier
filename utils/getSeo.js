@@ -1,3 +1,5 @@
+
+
 export const getSeo = async (uri) => {
   const params = {
     query: `
@@ -7,6 +9,11 @@ export const getSeo = async (uri) => {
           seo {
             title
             metaDesc
+            opengraphTitle
+            opengraphDescription
+            opengraphImage {
+              sourceUrl
+            }
           }
         }
       }
