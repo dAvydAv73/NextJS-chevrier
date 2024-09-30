@@ -77,6 +77,21 @@ export async function generateMetadata({ params: { locale } }) {
         description: seo?.opengraphDescription || seo?.metaDesc,
         images: seo?.opengraphImage?.sourceUrl ? [seo.opengraphImage.sourceUrl] : [],
       },
+      // Balises meta pour les robots et Googlebot
+      robots: {
+        index: true, // true pour autoriser l'indexation, false pour l'interdire
+        follow: true, // true pour suivre les liens, false pour l'interdire
+      },
+      additionalMetaTags: [
+        {
+          name: 'googlebot',
+          content: 'index, follow', // Directive pour Googlebot
+        },
+        {
+          name: 'robots',
+          content: 'noarchive', // Directive pour éviter la mise en cache de la page
+        }
+      ]
     };
   } catch (error) {
     console.error('Error generating metadata:', error);
