@@ -17,7 +17,7 @@ export const getPageStaticProps = async (context) => {
             ... on Page {
               id
               title
-              blocks(postTemplate: false){
+                  {
                 name
                 attributes {
                   ... on BlockAttributesUnion {
