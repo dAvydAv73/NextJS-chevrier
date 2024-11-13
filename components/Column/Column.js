@@ -1,3 +1,4 @@
+//nextJs/components/Column/Column.js
 "use client"
 import React, { useMemo } from "react";
 import { useInView } from "react-intersection-observer";

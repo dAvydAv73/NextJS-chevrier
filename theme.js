@@ -14,5 +14,8 @@ export const theme = {
   bgzinc500: "#71717A",
   bggray600: "#4B5563",
   carlingue: "#4B5563",
-  bgamber900: "#451a03"
+  bgamber900: "#451a03",
+  cacao: "#4C4442",
+  brume: "#7E6E64",
+  brumelight: "#efeded",
 };

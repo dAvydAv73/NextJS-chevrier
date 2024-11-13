@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { useTranslations } from 'next-intl';
-import LogoIcon from "../../public/img/LesAviateurs_logo_white.svg";
+import LogoIcon from "../../public/img/philippe_chevrier_officiel_logo_white.svg";
 
 export const Cover = ({ children, background }) => {
   const t = useTranslations('Home.Cover');

@@ -1,8 +1,7 @@
-
+//nextJs/src/app/[locale]/layout.js
 import {NextIntlClientProvider} from 'next-intl';
 import {unstable_setRequestLocale,getMessages} from 'next-intl/server';
-
-import { Red_Hat_Display, DM_Serif_Display } from "next/font/google";
+import { Lato, Libre_Bodoni } from "next/font/google";
 import "../../../styles/globals.css";
 import { getMenu } from "../../../utils/getMenu";
 import { MainMenu } from "../../../components/MainMenu";
@@ -10,19 +9,21 @@ import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 config.autoAddCss = false;
 
-const dmserifdisplay = DM_Serif_Display({
+// Configuration pour les polices Google Fonts
+const lato = Lato({
   subsets: ["latin"],
-  weight: ["400"],
+  weight: ["300", "400", "700"],
   display: "swap",
-  variable: "--font-dmserifdisplay",
+  variable: "--font-lato",
 });
 
-const redhatdisplay = Red_Hat_Display({
+const libreBodoni = Libre_Bodoni({
   subsets: ["latin"],
-  weight: ["300", "400", "600"],
+  weight: ["400", "700"],
   display: "swap",
-  variable: "--font-redhatdisplay",
+  variable: "--font-libre-bodoni",
 });
+
 
 export default async function RootLayout({ children, params }) {
   const {locale} = params;
@@ -37,8 +38,9 @@ export default async function RootLayout({ children, params }) {
 
 
   return (
-    <html lang={locale} className={`${redhatdisplay.variable} ${dmserifdisplay.variable}`}>
-      <body className="font-body">
+    <html lang={locale} className={`${lato.variable} ${libreBodoni.variable}`}>
+
+      <body>
         <NextIntlClientProvider locale={locale} messages={messages}>
 
           <MainMenu

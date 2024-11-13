@@ -4,7 +4,7 @@ import { getFontSizeForHeading, getTextAlign } from "../../utils/fonts";
 export const Heading = ({ textAlign, content, level, textColor }) => {
   const tag = React.createElement(`h${level}`, {
     dangerouslySetInnerHTML: { __html: content },
-    className: `neutra-bold uppercase tracking-wider max-w-5xl mx-auto my-6 ${getFontSizeForHeading(
+    className: `max-w-5xl mx-auto my-6 opacity-80 ${getFontSizeForHeading(
       level
     )} ${getTextAlign(textAlign)}`,
     style: textColor ? { color: textColor } : {}

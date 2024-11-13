@@ -42,8 +42,8 @@ export async function generateMetadata({ params: { locale } }) {
   unstable_setRequestLocale(locale);
 
   const slug = locale === 'en' ? "/home" : "/";
-  const baseUrl = 'https://lesaviateurs.ch';
-  
+ const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3001';
+    
   try {
     const seo = await getSeo(slug);
     

@@ -1,17 +1,74 @@
+/* NextJS TailwindCSS 2.0 configuration
+NextJs/styles/globals.css
+*/
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+.font-lato {
+  font-family: var(--font-lato), sans-serif;
+}
+
+.font-libre-bodoni {
+  font-family: var(--font-libre-bodoni), serif;
+}
+
+
 @layer components {
   .btn {
-    @apply hover:bg-gray-600 bg-gray-500 text-slate-50 whitespace-nowrap inline-block my-2 px-20 py-3 uppercase cursor-pointer  hover:text-white tracking-widest text-sm transition-all;
+    @apply font-lato hover:bg-[#4C4442] bg-[#7E6E64] text-slate-50 whitespace-nowrap inline-flex my-2 px-9 py-3 uppercase cursor-pointer  hover:text-white text-sm transition-all;
   }
   .btninvert{
-    @apply hover:bg-slate-300 bg-slate-100  text-gray-500 whitespace-nowrap inline-block my-2 px-20 py-3 uppercase cursor-pointer  hover:text-gray-500 tracking-widest text-sm transition-all;
+    @apply font-lato hover:bg-[#7E6E64] bg-slate-100  text-gray-500 whitespace-nowrap inline-block my-2 px-20 py-3 uppercase cursor-pointer  hover:text-white text-sm transition-all;
 
   }
+  
 }
-/* Neutra fonts face */
+
+.text-inside {
+  padding: 3em 5em;
+}
+.text-inside .text-left{
+  text-align: justify;
+}
+.inside-img{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+h1, h2, h3, h4 {
+  @apply font-libre-bodoni;
+  
+}
+h1, h2, h3, h4 {
+  font-weight: 400
+}
+.text-inside h2,
+.text-inside h3{
+  margin-bottom: 0.8em
+}
+.text-inside .btn{
+  margin-top: 1.6em;
+}
+h5{
+  @apply font-lato;
+  letter-spacing: 0.25em;
+  opacity: 0.6;
+  text-transform: uppercase;
+  font-size: 0.8em!important;
+  font-weight: 300!important;
+}
+p, li, span {
+  @apply font-lato;
+}
+
+body{
+  
+}
+.images2blocks{
+  /*min-height: 550px;*/
+}
+/* Neutra fonts face 
 @font-face {
   font-family: 'NeutraBold';
   src: url('/fonts/Neutra2Text-Bold.woff2') format('woff2');
@@ -33,7 +90,7 @@
   font-style: normal;
   font-display: swap;
 }
-
+*/
 .logoLink{
 
 }
@@ -56,29 +113,28 @@
   font-weight: 300;
   font-size: 0.9em;
   text-shadow: 1px 2px 1px rgba(0, 0, 0, 0.6);
-  font-family: 'NeutraDemi';
 
 }
 h2, h3, h4{
   font-weight: 700;
 }
 .navbar.scrolled .langSwitcher a{
-  color: #0f172a;
+  color: #4C4442;
   border: 0 transparent;
-  font-family: 'NeutraDemi';
+  @apply font-lato;
 }
 .navbar .langSwitcher a{
   color: #fff;
   border: 0 transparent;
-  font-family: 'NeutraDemi';
+  @apply font-lato;
 }
 .navbar.scrolled .langSwitcher span{
-  color: #0f172a;
-  font-family: 'NeutraDemi';
+  color: #4C4442;
+  @apply font-lato;
 }
 .navbar .langSwitcher span{
   color: #fff;
-  font-family: 'NeutraDemi';
+  @apply font-lato;
 }
 
 .navbar .main-menu .relative.group{
@@ -93,8 +149,7 @@ h2, h3, h4{
   margin-bottom: -5em;
 }
 strong{
-  font-weight: 500!important;
-  font-family: 'NeutraDemi'!important;
+  font-weight: 700!important;
 }
 .horairesinside{
   padding-top: 6em
@@ -108,7 +163,7 @@ strong{
   }
   .homeCover{
     justify-content: flex-end;
-    background: linear-gradient(to top right, rgb(17, 24, 39), transparent);
+    background: linear-gradient(to top right, #7E6E64, transparent);
 
   }
   .homeCover h2 {

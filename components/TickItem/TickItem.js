@@ -1,3 +1,4 @@
+//NextJs/Components/TickItem/TickItem.js
 import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 

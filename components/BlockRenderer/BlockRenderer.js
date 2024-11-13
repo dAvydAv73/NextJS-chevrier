@@ -9,6 +9,10 @@ import { Paragraph } from "../Paragraph";
 import { TickItem } from "../TickItem";
 import Image from "next/image";
 import { theme } from "../../theme";
+import { ListItem } from "../ListItem/ListItem";
+import { ListItemContent } from "../ListItemContent/ListItemContent";
+import { Images2Block } from "../Images2Block/Images2Block";
+
 
 export const BlockRenderer = ({ blocks }) => {
   return blocks.map((block, index) => {
@@ -157,6 +161,25 @@ export const BlockRenderer = ({ blocks }) => {
           />
         );
       }
+      case "core/list": {
+        return (
+          <div key={block.id} className="space-y-2">
+            {block.innerBlocks && block.innerBlocks.map((innerBlock, innerIndex) => (
+              <BlockRenderer
+                key={innerBlock.id || `inner-block-${innerIndex}`}
+                blocks={[{...innerBlock, index: innerIndex}]}
+              />
+            ))}
+          </div>
+        );
+      }
+      case "core/list-item": {
+        return (
+          <ListItem key={block.id} index={block.index}>
+            <ListItemContent content={block.attributes.content} />
+          </ListItem>
+        );
+      }
       case "acf/contact-div": {
         //console.log("acf/contact-div block:", block);
     
@@ -171,6 +194,33 @@ export const BlockRenderer = ({ blocks }) => {
             {/* Si vous avez un contenu spécifique à injecter, il peut être ajouté ici */}
           </div>
         );
+    }
+    case "acf/images2block": {
+      // On vérifie si data existe dans les attributes
+      const data = block.attributes.data || {};
+      
+      // On prépare les objets d'image
+      const image1 = data.image1 ? {
+        url: data.image1.url || '',
+        alt: data.image1.alt || '',
+        width: data.image1.width || 800,
+        height: data.image1.height || 600
+      } : null;
+    
+      const image2 = data.image2 ? {
+        url: data.image2.url || '',
+        alt: data.image2.alt || '',
+        width: data.image2.width || 800,
+        height: data.image2.height || 600
+      } : null;
+    
+      return (
+        <Images2Block
+          key={block.id}
+          image1={image1}
+          image2={image2}
+        />
+      );
     }
       default: {
         console.log(`UNKNOWN BLOCK TYPE at index ${index}:`, block.name);

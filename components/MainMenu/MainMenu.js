@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { ButtonLink } from "../ButtonLink";
 import Image from 'next/image';
-import LogoIcon from "../../public/img/LesAviateurs_logo_sky.svg";
+import LogoIcon from "../../public/img/philippe_chevrier_officiel_logo.svg";
 import {LanguageSwitcher} from "../LanguageSwitcher";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUtensils } from "@fortawesome/free-solid-svg-icons";
@@ -47,9 +47,9 @@ export const MainMenu = ({
 
 
   return (
-      <div className={`navbar fixed left-0 right-0 bottom-0 sm:top-0 sm:bottom-auto z-20 transition-all duration-300 
+      <div className={`navbar fixed left-0 right-0 bottom-0 sm:top-0 sm:bottom-auto z-30 transition-all duration-300 
         ${isScrolled 
-          ? 'bg-amber-50 border-t sm:border-b border-gray-300 shadow-md scrolled' 
+          ? 'bg-neutral-50 border-t sm:border-b border-gray-300 shadow-md scrolled' 
           : 'bg-transparent border-t sm:border-b border-transparent'
         }
         h-[110px] sm:h-[140px]`}
@@ -77,7 +77,7 @@ export const MainMenu = ({
               className="relative group animate-slideLeft"
             >
               <a href={item.destination} className={`p-5 block transition-colors duration-300 px-1 py-1 ${
-                isScrolled ? 'text-slate-900' : 'text-white drop-shadow-md'
+                isScrolled ? 'text-[#4C4442]' : 'text-white drop-shadow-md'
               }`}>
                 {item.label}
               </a>
@@ -102,13 +102,13 @@ export const MainMenu = ({
               destination={`mailto:${callToActionEmail}?subject=Sujet%20du%20mail&body=Email%20content`}
               label={callToActionLabel}
               className={`px-1 py-1 transition-colors duration-300 ${
-                isScrolled ? 'text-sky-950' : 'text-white drop-shadow-md'
+                isScrolled ? 'text-[#4C4442]' : 'text-white drop-shadow-md'
               }`}
             />
             <a href={callToAction2Destination} 
                alt={callToAction2Label}
                className={`ml-2 transition-colors duration-300 ${
-                isScrolled ? 'text-sky-950' : 'text-white drop-shadow-md'
+                isScrolled ? 'text-[#4C4442]' : 'text-white drop-shadow-md'
                }`}>
               <FontAwesomeIcon icon={faUtensils} className=""/>
             </a>
