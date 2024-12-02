@@ -53,7 +53,7 @@ export async function generateMetadata({ params: { locale } }) {
     }));
 
     return {
-      title: seo?.title || "Les Aviateurs",
+      title: seo?.title || "Philippe Chevrier | Site Officiel",
       description: seo?.metaDesc || "",
       alternates: {
         canonical: `${baseUrl}/${locale}`, // Ajouter la locale ici aussi
@@ -63,7 +63,7 @@ export async function generateMetadata({ params: { locale } }) {
         }
       },
       openGraph: {
-        title: seo?.opengraphTitle || seo?.title || "Les Aviateurs",
+        title: seo?.opengraphTitle || seo?.title || "Philippe Chevrier | Site Officiel",
         description: seo?.opengraphDescription || seo?.metaDesc || "",
         url: `${baseUrl}/${locale}`, // Inclure la locale dans l'URL Open Graph
         siteName: 'Les Aviateurs',
@@ -96,7 +96,7 @@ export async function generateMetadata({ params: { locale } }) {
   } catch (error) {
     console.error('Error generating metadata:', error);
     return {
-      title: "Les Aviateurs",
+      title: "Philippe Chevrier | Site Officiel",
       description: "",
     };
   }

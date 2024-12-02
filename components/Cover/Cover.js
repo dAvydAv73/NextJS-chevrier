@@ -7,13 +7,13 @@ export const Cover = ({ children, background }) => {
   return (
     <div className="h-screen text-white relative min-h-[400px] max-h-[900px] flex items-center  flex-col	homeCover pb-20">
       
-      <a href='/' title="Les Aviateurs par Philippe Chevrier - Home" className="text-white logoLink animate-slideLeft">
+      <a href='/' title="Philippe Chevrier - Home" className="text-white logoLink animate-slideLeft">
         <Image 
             priority
             src={LogoIcon}
             height={180}
             width={520}
-            alt="Les Aviateurs par Philippe Chevrier"
+            alt="Philippe Chevrier"
             className="logoLinkImg w-[80vw] max-w-[520px]"
           />
       </a>
