@@ -12,6 +12,22 @@ NextJs/styles/globals.css
 .font-libre-bodoni {
   font-family: var(--font-libre-bodoni), serif;
 }
+.job-link {
+  text-decoration: underline;
+  position: relative;
+  padding-right: 1.5em; /* Espace pour l'icône */
+  margin-top: -1em;
+  
+}
+
+.job-link::after {
+  content: "\f08e"; /* Code Unicode de l'icône fa-arrow-up-right-from-square */
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900; /* Nécessaire pour les icônes solid */
+  position: absolute;
+  margin-left: 0.5em;
+  font-size: 0.8em; /* Ajuste la taille de l'icône si nécessaire */
+}
 
 
 @layer components {
@@ -24,11 +40,32 @@ NextJs/styles/globals.css
   }
   
 }
+ul{
 
+}
+li{
+  
+
+}
+img.logo-img {
+  margin: 0 auto;
+  background-color: rgba(126, 110,   100, 0.8);
+  height: 240px;
+  width: 240px;
+  border-radius: 50%;
+  padding: 1em;
+}
 .text-inside {
   padding: 3em 5em;
 }
-.text-inside .text-left{
+.text-inside-left{
+  padding: 3em 3em 3em 0
+}
+.text-inside-right{
+  padding: 3em 0 3em 3em 
+}
+.text-inside-left .text-left,
+.text-inside-right .text-left{
   text-align: justify;
 }
 .inside-img{

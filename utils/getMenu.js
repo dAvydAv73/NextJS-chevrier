@@ -1,5 +1,3 @@
-import { mapMainMenuItems } from "./mapMainMenuItems";
-
 export const getMenu = async (locale = 'en') => {
   const params = {
     query: `
@@ -7,42 +5,22 @@ export const getMenu = async (locale = 'en') => {
       acfOptionsMainMenu {
         mainMenu {
           enLang {
-            callToActionButton {
-              label
-              emaildestination
-            }
-            callToActionButton2 {
-              label
-              url
-            }
             menuItems {
               menuItem {
-                label
                 destination {
-                  ... on Page {
-                    uri
-                  }
+                  url
                 }
+                label
               }
             }
           }
           frLang {
-            callToActionButton {
-              label
-              emaildestination
-            }
-            callToActionButton2 {
-              label
-              url
-            }
             menuItems {
               menuItem {
-                label
                 destination {
-                  ... on Page {
-                    uri
-                  }
+                  url
                 }
+                label
               }
             }
           }
@@ -61,31 +39,44 @@ export const getMenu = async (locale = 'en') => {
       body: JSON.stringify(params),
     });
 
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-
     const { data } = await response.json();
+    console.log("Raw API Response:", data);
 
-    if (!data || !data.acfOptionsMainMenu || !data.acfOptionsMainMenu.mainMenu) {
-      throw new Error('Data structure is not as expected');
-    }
+    // Sélectionner les données selon la langue
+    const langData = locale === 'en' 
+      ? data.acfOptionsMainMenu.mainMenu.enLang.menuItems 
+      : data.acfOptionsMainMenu.mainMenu.frLang.menuItems;
 
-    const langData = locale === 'en' ? data.acfOptionsMainMenu.mainMenu.enLang : data.acfOptionsMainMenu.mainMenu.frLang;
+    const mappedItems = mapMainMenuItems(langData);
+    console.log("Mapped Menu Items:", mappedItems);
 
     return {
-      mainMenuItems: mapMainMenuItems(langData.menuItems),
-      callToActionLabel: langData.callToActionButton.label,
-      callToActionEmail: langData.callToActionButton.emaildestination,
-      callToAction2Label: langData.callToActionButton2.label,
-      callToAction2Destination: langData.callToActionButton2.url,
+      mainMenuItems: mappedItems,
     };
   } catch (error) {
     console.error('Error fetching menu data:', error);
     return {
       mainMenuItems: [],
-      callToActionLabel: 'Accueil',
-      callToActionDestination: '/',
     };
   }
+};
+
+export const mapMainMenuItems = (menuItems) => {
+  if (!menuItems) return [];
+
+  return menuItems.map(item => {
+    const menuItem = item.menuItem;
+    if (!menuItem || !menuItem.destination) return null;
+
+    // Extraire le label de l'URL (vous pourriez vouloir ajouter le label dans votre requête GraphQL)
+    const urlParts = menuItem.destination.url.split('/');
+    const label = urlParts[urlParts.length - 2] || 'Home';
+
+    return {
+      id: crypto.randomUUID(),
+      destination: menuItem.destination,
+      label: menuItem.label,
+      subMenuItems: []
+    };
+  }).filter(Boolean); // Enlever les items null
 };

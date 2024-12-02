@@ -17,15 +17,15 @@ export const ListItem = ({ children, index = 0 }) => {
   }), [inView, index]);
 
   return (
-    <ul className="mb-4 list-none">
+    
       <li
         ref={ref}
         style={styles}
         className="flex items-start gap-3"
       >
-        <span className="inline-block w-2 h-2 mt-1"></span>
+        <span className="inline-block w-2 h-2 mt-2 pt-2 bg-[#7E6E64] opacity-80 rounded-full"></span>
         <div className="flex-1 ">{children}</div>
       </li>
-    </ul>
+    
   );
 };

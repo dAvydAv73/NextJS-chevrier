@@ -8,16 +8,18 @@ export const Columns = ({
   textColor,
   backgroundColor,
   customClasses,
+  customId,
 }) => {
 
   return (
     <div
-      className={`py-10 ${customClasses}`}
+      className={`py-4 ${customClasses}`}
       style={{ color: textColor, backgroundColor }}
+      id={customId}
     >
       <div
         className={`max-w-5xl mx-auto ${
-          isStackedOnMobile ? "block md:flex" : "flex"
+          isStackedOnMobile ? "block md:flex justify-center items-center" : "flex"
         }`}
       >
         {React.Children.map(children, (child, index) => (

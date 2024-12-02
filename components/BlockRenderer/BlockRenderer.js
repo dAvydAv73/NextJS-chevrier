@@ -1,3 +1,4 @@
+"use client";
 import { CallToActionButton } from "../CallToActionButton";
 import { Column } from "../Column";
 import { Columns } from "../Columns";
@@ -12,9 +13,16 @@ import { theme } from "../../theme";
 import { ListItem } from "../ListItem/ListItem";
 import { ListItemContent } from "../ListItemContent/ListItemContent";
 import { Images2Block } from "../Images2Block/Images2Block";
+import { SliderBlock } from "../SliderBlock";
+import { useEffect } from 'react';
 
 
 export const BlockRenderer = ({ blocks }) => {
+  /*
+  useEffect(() => {
+    console.log("BlockRenderer mounted with blocks:", blocks);
+  }, [blocks]);
+  */
   return blocks.map((block, index) => {
     //console.log('Block:', JSON.stringify(block, null, 2)); // Pour le débogage
     // Vérification de sécurité pour block.attributes
@@ -26,7 +34,7 @@ export const BlockRenderer = ({ blocks }) => {
     //console.log(`Custom classes for block ${index}:`, customClasses); // Log pour le débogage
 
     switch (block.name) {
-      
+
       case "acf/tickitem": {
         return (
           <TickItem key={block.id}>
@@ -66,6 +74,8 @@ export const BlockRenderer = ({ blocks }) => {
         );
       }
       case "core/paragraph": {
+        const paragraphClasses = block.attributes.className || ''; // Ajout de cette ligne pour récupérer className
+
         return (
           <Paragraph
             key={block.id}
@@ -75,6 +85,8 @@ export const BlockRenderer = ({ blocks }) => {
               theme[block.attributes.textColor] ||
               block.attributes.style?.color?.text
             }
+            customClasses={`${customClasses} ${paragraphClasses}`.trim()} // Combine les deux sources de classes
+
           />
         );
       }
@@ -101,7 +113,13 @@ export const BlockRenderer = ({ blocks }) => {
         );
       }
       case "core/columns": {
-       
+        
+        /*
+        console.log("Columns block:", {
+          block: block,
+          customId: attributes.metadata?.name,
+        });
+        */
         return (
           <Columns
             key={block.id || `column-${index}`}
@@ -115,6 +133,7 @@ export const BlockRenderer = ({ blocks }) => {
               theme[attributes.backgroundColor] ||
               attributes.style?.color?.background
             }
+            customId={attributes.metadata?.name}
           >
             {block.innerBlocks && block.innerBlocks.map((innerBlock, innerIndex) => (
               <BlockRenderer
@@ -151,25 +170,34 @@ export const BlockRenderer = ({ blocks }) => {
         return <BlockRenderer key={block.id} blocks={block.innerBlocks} />;
       }
       case "core/image": {
+       
+        const imageClasses = block.attributes.className || '';
+
         return (
+          
           <Image
             key={block.id}
             src={block.attributes.url}
             height={block.attributes.height}
             width={block.attributes.width}
             alt={block.attributes.alt || ""}
+            className={imageClasses || ""} // Ajout de la classe
+
           />
+          
         );
       }
       case "core/list": {
         return (
           <div key={block.id} className="space-y-2">
+            <ul className="mb-8">
             {block.innerBlocks && block.innerBlocks.map((innerBlock, innerIndex) => (
               <BlockRenderer
                 key={innerBlock.id || `inner-block-${innerIndex}`}
                 blocks={[{...innerBlock, index: innerIndex}]}
               />
             ))}
+            </ul>
           </div>
         );
       }
@@ -181,7 +209,6 @@ export const BlockRenderer = ({ blocks }) => {
         );
       }
       case "acf/contact-div": {
-        //console.log("acf/contact-div block:", block);
     
         const blockId = block.attributes.data.id || ""; // Récupère l'ID du bloc
     
@@ -214,6 +241,8 @@ export const BlockRenderer = ({ blocks }) => {
         height: data.image2.height || 600
       } : null;
     
+      
+    
       return (
         <Images2Block
           key={block.id}
@@ -222,6 +251,24 @@ export const BlockRenderer = ({ blocks }) => {
         />
       );
     }
+    case "acf/mysliderblock": {
+    
+      // Préparer les images
+      const images = ["image1", "image2", "image3"].map((key) => {
+        const img = block.attributes.data?.[key];
+        return img
+          ? {
+              url: img.url || "",
+              alt: img.alt || "",
+              width: img.width || 800,
+              height: img.height || 600,
+            }
+          : null;
+      }).filter(Boolean); // Supprime les valeurs nulles
+    
+      return <SliderBlock key={block.id} images={images} />;
+    }
+    
       default: {
         console.log(`UNKNOWN BLOCK TYPE at index ${index}:`, block.name);
         return (
