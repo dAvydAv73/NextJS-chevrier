@@ -212,6 +212,11 @@ strong{
 /* Vous pouvez ajouter d'autres styles spécifiques pour mobile ici */
 
 @media (max-width: 767px) {
+
+  .text-inside-left,
+  .text-inside-right{
+    padding: 2em 1em;
+  }
   .navbar .container,
   .navbar .langSwitcher,
   .navbar .ml-3  {
