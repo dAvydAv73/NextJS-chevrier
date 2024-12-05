@@ -3,8 +3,8 @@ import LogoIconWhite from "../../public/img/philippe_chevrier_officiel_logo_whit
 
 export const Footer = ({ items }) => {
   return (
-    <footer>
-      <div className="bg-[#4C4442] bg-opacity-95 text-neutral-50">
+    <footer className="pb-[110px] sm:pb-0">
+      <div className="bg-[#4C4442] bg-opacity-95 text-neutral-50 ">
         <div className="container mx-auto px-5 py-10">
           {/* Logo centré */}
           <div className="flex justify-center mb-8">

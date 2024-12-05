@@ -138,7 +138,7 @@ export const MainMenu = ({
           <nav>
             <ul className="space-y-4 text-center text-base">
             {(items || []).map((item) => (
-              <div key={item.id} className="relative group animate-slideLeft">
+              <div key={item.id} className="relative group ">
                 <a
                   href={item.destination?.url || '#'} // Ajout de la vérification
                   className={`p-5 block transition-colors duration-300 px-1 py-1 text-white uppercase font-lato tracking-wider"
