@@ -10,7 +10,7 @@ export const ListItem = ({ children, index = 0 }) => {
   });
 
   const styles = useMemo(() => ({
-    transform: inView ? "none" : "translateX(-100px)",
+   // transform: inView ? "none" : "translateX(-100px)",
     opacity: inView ? 0.6 : 0,
     transition: `all 0.5s ease-in ${index * 0.2}s`,
     color: '#7E6E64',
