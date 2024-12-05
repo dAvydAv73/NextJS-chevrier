@@ -49,10 +49,9 @@ li{
 }
 img.logo-img {
   margin: 0 auto;
-  background-color: rgba(126, 110,   100, 0.8);
-  height: 240px;
-  width: 240px;
-  border-radius: 50%;
+  
+  height: auto;
+  width: 220px;
   padding: 1em;
 }
 .text-inside {
@@ -73,11 +72,11 @@ img.logo-img {
   justify-content: center;
   align-items: center;
 }
-h1, h2, h3, h4 {
+h1, h2, h3, h4, h5 {
   @apply font-libre-bodoni;
   
 }
-h1, h2, h3, h4 {
+h1, h2, h3, h4, h5 {
   font-weight: 400
 }
 .text-inside h2,
@@ -88,11 +87,9 @@ h1, h2, h3, h4 {
   margin-top: 1.6em;
 }
 h5{
-  @apply font-lato;
-  letter-spacing: 0.25em;
   opacity: 0.6;
   text-transform: uppercase;
-  font-size: 0.8em!important;
+  font-size: 1em!important;
   font-weight: 300!important;
 }
 p, li, span {

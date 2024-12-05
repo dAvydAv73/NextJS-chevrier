@@ -18,7 +18,7 @@ export const Column = React.memo(({
 
   const styles = useMemo(() => {
     const baseStyles = {
-      transform: inView ? "none" : "translateY(200px)",
+      //transform: inView ? "none" : "translateY(200px)",
       opacity: inView ? 1 : 0,
       transition: `all 0.5s ease-in ${index * 0.3}s`,
     };

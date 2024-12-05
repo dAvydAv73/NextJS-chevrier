@@ -7,7 +7,7 @@ export const Cover = ({ children, background }) => {
   return (
     <div className="h-screen text-white relative min-h-[400px] max-h-[900px] flex items-center  flex-col	homeCover pb-20">
       
-      <a href='/' title="Philippe Chevrier - Home" className="text-white logoLink animate-slideLeft">
+      <a href='/' title="Philippe Chevrier - Home" className="text-white logoLink ">
         <Image 
             priority
             src={LogoIcon}
@@ -28,7 +28,7 @@ export const Cover = ({ children, background }) => {
         />
       )}
       
-      <div className="max-w-5xl z-10 drop-shadow-md mt-10 animate-slideRight sm:mt-0">{children}</div>
+      <div className="max-w-5xl z-10 drop-shadow-md mt-10 sm:mt-0">{children}</div>
     </div>
   );
 };
