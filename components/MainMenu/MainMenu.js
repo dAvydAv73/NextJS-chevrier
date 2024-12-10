@@ -22,7 +22,7 @@ export const MainMenu = ({
   const [isMenuOpen, setIsMenuOpen] = useState(false); // État pour gérer l'ouverture du menu
 
   useEffect(() => {
-    console.log("Menu Items received:", items);
+    //console.log("Menu Items received:", items);
   }, [items]);
 
   useEffect(() => {

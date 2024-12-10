@@ -48,7 +48,7 @@ export const getMenu = async (locale = 'en') => {
       : data.acfOptionsMainMenu.mainMenu.frLang.menuItems;
 
     const mappedItems = mapMainMenuItems(langData);
-    console.log("Mapped Menu Items:", mappedItems);
+    //console.log("Mapped Menu Items:", mappedItems);
 
     return {
       mainMenuItems: mappedItems,

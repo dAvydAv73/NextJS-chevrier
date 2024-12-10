@@ -5,7 +5,7 @@ import React from 'react';
 export const LanguageSwitcher = () => {
     const pathname = usePathname();
     
-    console.log('Current pathname:', pathname, typeof pathname);
+    //console.log('Current pathname:', pathname, typeof pathname);
 
     const getOtherLangPath = (currentPath, targetLang) => {
         if (typeof currentPath !== 'string') {

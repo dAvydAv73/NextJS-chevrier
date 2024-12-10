@@ -1,6 +1,7 @@
 /* NextJS TailwindCSS 2.0 configuration
 NextJs/styles/globals.css
 */
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -20,14 +21,7 @@ NextJs/styles/globals.css
   
 }
 
-.job-link::after {
-  content: "\f08e"; /* Code Unicode de l'icône fa-arrow-up-right-from-square */
-  font-family: "Font Awesome 6 Free";
-  font-weight: 900; /* Nécessaire pour les icônes solid */
-  position: absolute;
-  margin-left: 0.5em;
-  font-size: 0.8em; /* Ajuste la taille de l'icône si nécessaire */
-}
+
 
 
 @layer components {
@@ -47,12 +41,20 @@ li{
   
 
 }
+
+
 img.logo-img {
   margin: 0 auto;
   
   height: auto;
   width: 220px;
   padding: 1em;
+}
+img.logo-img.logo-img-big{
+  width: 300px;
+}
+img.logo-img.logo-img-small{
+  width: 180px;
 }
 .text-inside {
   padding: 3em 5em;
@@ -209,6 +211,15 @@ strong{
 /* Vous pouvez ajouter d'autres styles spécifiques pour mobile ici */
 
 @media (max-width: 767px) {
+
+
+  .mobile-order-first {
+    order: -1 !important;
+  }
+  
+  .mobile-order-last {
+    order: 999 !important;
+  }
 
   .text-inside-left,
   .text-inside-right{
