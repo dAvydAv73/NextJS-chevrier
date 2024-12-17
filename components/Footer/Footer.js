@@ -1,5 +1,7 @@
 import Image from "next/image";
 import LogoIconWhite from "../../public/img/philippe_chevrier_officiel_logo_white.svg";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faLinkedin } from "@fortawesome/free-brands-svg-icons";
 
 export const Footer = ({ items }) => {
   return (
@@ -27,12 +29,23 @@ export const Footer = ({ items }) => {
                 <li key={item.id}>
                   <a
                     href={item.destination?.url}
-                    className="font-lato hover:underline transition-all duration-300 uppercase tracking-wider text-sm "
+                    className="font-lato hover:underline transition-all duration-300 uppercase tracking-wider text-sm"
                   >
                     {item.label}
                   </a>
                 </li>
               ))}
+              <li>
+                <a
+                  href="https://www.linkedin.com/company/groupe-philippe-chevrier-suisse/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title="Suivez-nous sur LinkedIn"
+                  className="text-neutral-50 hover:text-[#0077B5] transition-all duration-300"
+                >
+                  <FontAwesomeIcon icon={faLinkedin} className="w-6 h-6" />
+                </a>
+              </li>
             </ul>
           </nav>
         </div>
