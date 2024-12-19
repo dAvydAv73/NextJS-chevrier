@@ -66,7 +66,7 @@ export async function generateMetadata({ params: { locale } }) {
         title: seo?.opengraphTitle || seo?.title || "Philippe Chevrier | Site Officiel",
         description: seo?.opengraphDescription || seo?.metaDesc || "",
         url: `${baseUrl}/${locale}`, // Inclure la locale dans l'URL Open Graph
-        siteName: 'Les Aviateurs',
+        siteName: 'Philippe Chevrier',
         images: seo?.opengraphImage?.sourceUrl ? [{ url: seo.opengraphImage.sourceUrl }] : [],
         locale: locale,
         type: 'website',
